@@ -858,7 +858,7 @@
   </footer>
 
   <script>
-    // === 📦 ДАННЫЕ КЕЙСОВ (добавлен 6-й кейс с двумя ссылками) ===
+    // === 📦 ДАННЫЕ КЕЙСОВ ===
     const casesData = [
       {
         id: 1, title: "Эмоциональный интеллект", format: "async", topic: ["cs"], tags: ["bloom","outcome","gamification","ai","ssdl","empathy","metrics"],
@@ -932,13 +932,16 @@
       const frontFeatures = c.front.features.map(f => `<li>${f}</li>`).join('');
       const backMethods = c.back.methods.map(m => `<li>${m}</li>`).join('');
 
-      // Генерация блока ссылок: если есть link2 – показываем две ссылки
       let linksHtml = '';
       if (c.back.link) {
-        linksHtml += `<a href="${c.back.link}" target="_blank" class="case-link">📊 Презентация концепции</a>`;
-      }
-      if (c.back.link2) {
-        linksHtml += `<a href="${c.back.link2}" target="_blank" class="case-link-secondary">📋 Детальная программа</a>`;
+        // Если есть вторая ссылка (ESG-кейс) — показываем обе с разными текстами
+        if (c.back.link2) {
+          linksHtml += `<a href="${c.back.link}" target="_blank" class="case-link">📊 Презентация концепции</a>`;
+          linksHtml += `<a href="${c.back.link2}" target="_blank" class="case-link-secondary">📋 Детальная программа</a>`;
+        } else {
+          // Обычный кейс — одна ссылка на полную программу
+          linksHtml += `<a href="${c.back.link}" target="_blank" class="case-link">🔗 Полная программа курса</a>`;
+        }
       }
 
       card.innerHTML = `
